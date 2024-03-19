@@ -1,0 +1,57 @@
+{
+  "name": "@flaminc/books-backend",
+  "description": "Backend for the books app",
+  "version": "0.0.0-development",
+  "author": "capitN.flam",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rimraf --glob dist coverage flaminc-books-backend-*.tgz",
+    "format": "prettier --write .",
+    "lint": "eslint . && prettier --check .",
+    "pre-commit": "lint-staged",
+    "prepare": "husky",
+    "semantic-release": "semantic-release",
+    "test": "vitest",
+    "test:ci": "vitest --run",
+    "test:ci:coverage": "vitest --run --coverage",
+    "type-check": "tsc --pretty --noEmit"
+  },
+  "bugs": "https://github.com/capitnflam/books-backend/issues",
+  "dependencies": {
+    "@flaminc/books-types": "1.1.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.2.0",
+    "@commitlint/config-conventional": "19.1.0",
+    "@commitlint/types": "19.0.3",
+    "@flaminc/eslint-plugin": "1.2.0",
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/commit-analyzer": "12.0.0",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "10.0.2",
+    "@semantic-release/release-notes-generator": "12.1.0",
+    "@types/node": "20.11.28",
+    "@vitest/coverage-v8": "1.4.0",
+    "@vitest/ui": "1.4.0",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.2",
+    "prettier": "3.2.5",
+    "rimraf": "5.0.5",
+    "semantic-release": "23.0.3",
+    "semantic-release-npm-github-publish": "1.5.5",
+    "syncpack": "12.3.0",
+    "typescript": "5.4.2",
+    "vitest": "1.4.0"
+  },
+  "files": [
+    "package.json",
+    "dist"
+  ],
+  "homepage": "https://github.com/capitnflam/books-backend#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": "capitnflam/books-backend"
+}
