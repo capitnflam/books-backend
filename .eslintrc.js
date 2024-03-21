@@ -10,17 +10,4 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.lint.json',
   },
-  rules: {
-    'unicorn/no-array-reduce': 'off',
-    'unicorn/no-null': 'off',
-    'unicorn/prefer-top-level-await': 'off',
-  },
-  overrides: [
-    {
-      files: ['*.js'],
-      rules: {
-        'unicorn/prefer-module': 'off',
-      },
-    },
-  ],
 }
