@@ -1,5 +1,25 @@
 # books-backend
 
+## Create db
+
+```sql
+CREATE USER booksserver WITH ENCRYPTED PASSWORD 'bookspassword';
+CREATE DATABASE books;
+GRANT ALL PRIVILEGES ON DATABASE books TO booksserver;
+GRANT ALL PRIVILEGES ON SCHEMA public TO booksserver;
+```
+
+## Configure environment
+
+In a `.env` file, put the following:
+
+```
+BOOKS_SERVER_DATABASE_URL="postgres://booksserver:bookspassword@localhost:5433/books"
+BOOKS_SERVER_LOG_LEVEL="debug"
+BOOKS_SERVER_LISTEN="127.0.0.1"
+BOOKS_SERVER_PORT="3000"
+```
+
 ## TypeORM commands
 
 ### Generate a migration
