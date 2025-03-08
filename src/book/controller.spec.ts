@@ -33,7 +33,7 @@ describe('bookController', () => {
   // TODO: write tests
   it('should return a list of books', async () => {
     await expect(
-      controller.getBooks({ limit: 1, page: 1 }),
+      controller.getBooks({ limit: 1, page: 1, path: '/books' }),
     ).resolves.toStrictEqual([])
     expect(getAll).toHaveBeenCalled()
   })
