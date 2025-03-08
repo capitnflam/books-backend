@@ -2,19 +2,16 @@ import {
   BookRequest,
   BookResult,
   BooksResultItem,
-  // BooksResultItemInput,
+  BooksResultItemInput,
   bookResultSchema,
-  // booksResultItemSchema,
+  booksResultItemSchema,
 } from '@flaminc/books-types'
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import { PaginateQuery, Paginated, paginate } from 'nestjs-paginate'
 import { Repository } from 'typeorm'
 
-import { Filtering } from '../decorators/filtering-parameters'
-import { Pagination } from '../decorators/pagination-parameters'
-import { Sorting } from '../decorators/sorting-parameters'
-import { getOrder, getWhere } from '../decorators/transformers/typeorm'
-
+import { PAGINATION_CONFIG } from './constants'
 import { BookEntity } from './entity'
 
 @Injectable()
@@ -24,32 +21,20 @@ export class BookService {
     private readonly booksRepository: Repository<BookEntity>,
   ) {}
 
-  getAll(
-    options: Pagination,
-    sort?: Sorting<BookEntity>[],
-    filter?: Filtering<BookEntity>[],
-  ): BooksResultItem[] {
-    const order = getOrder(sort)
-    const where = getWhere(filter)
-    console.log(order, where, options)
-    // const requestResult = await paginate<BooksResultItemInput>(
-    //   this.booksRepository,
-    //   options,
-    //   {
-    //     select: { authors: { id: true } },
-    //     relations: ['authors'],
-    //     order,
-    //     where,
-    //   },
-    // )
+  async getAll(query: PaginateQuery): Promise<Paginated<BooksResultItem>> {
+    console.log('query', query)
 
-    // return new Pagination<BooksResultItem>(
-    //   requestResult.items.map((item) => booksResultItemSchema.parse(item)),
-    //   requestResult.meta,
-    //   requestResult.links,
-    // )
-    // TODO: Implement the method
-    return []
+    const requestResult = await paginate<BooksResultItemInput>(
+      query,
+      this.booksRepository,
+      PAGINATION_CONFIG,
+    )
+
+    return {
+      data: requestResult.data.map((item) => booksResultItemSchema.parse(item)),
+      meta: requestResult.meta as Paginated<BooksResultItem>['meta'],
+      links: requestResult.links,
+    }
   }
 
   async get(id: number): Promise<BookResult> {

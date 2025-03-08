@@ -4,7 +4,7 @@ import { http } from '../constants/http'
 
 import { AuthorService } from './service'
 
-@Controller('authors?')
+@Controller('authors')
 export class AuthorController {
   constructor(private readonly authorService: AuthorService) {}
 

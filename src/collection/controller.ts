@@ -4,7 +4,7 @@ import { http } from '../constants/http'
 
 import { CollectionService } from './service'
 
-@Controller('collections?')
+@Controller('collections')
 export class CollectionController {
   constructor(private readonly collectionService: CollectionService) {}
 

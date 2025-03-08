@@ -7,6 +7,7 @@ import { createApp } from './create-app'
 
 async function prepareApp(bufferLogs = true) {
   const app = await createApp(bufferLogs)
+  app.set('query parser', 'extended')
   app.use(helmet())
 
   const configService = app.get(ConfigService)
@@ -32,19 +33,18 @@ async function prepareApp(bufferLogs = true) {
 
 async function bootstrap() {
   const app = await prepareApp()
-
   const configService = app.get(ConfigService)
   const port = configService.get('port')
   const addr = configService.get('listen')
 
   await app.listen(port, addr)
-  Logger.debug('Application is running', { appURL: await app.getUrl() })
+  Logger.debug('Application started', { appURL: await app.getUrl() })
 }
 
 bootstrap()
   .then(() => {
     Logger.debug('Application stopped')
   })
-  .catch(() => {
-    Logger.error('Application crashed')
+  .catch((error: Error) => {
+    console.error('Application crashed', { error })
   })
