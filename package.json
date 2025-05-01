@@ -48,7 +48,7 @@
     "@flaminc/semantic-release-configs": "1.0.3",
     "@nestjs/cli": "11.0.5",
     "@nestjs/testing": "11.0.11",
-    "@swc/core": "1.11.8",
+    "@swc/core": "1.11.24",
     "@types/express": "5.0.0",
     "@types/node": "22.13.9",
     "@types/yargs": "17.0.33",
